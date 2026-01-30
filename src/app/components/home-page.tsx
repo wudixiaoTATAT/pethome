@@ -16,7 +16,8 @@ export function HomePage() {
   const [displayedAnimals, setDisplayedAnimals] = useState<Animal[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedType, setSelectedType] = useState<'all' | 'cat' | 'dog'>('all');
+  const [selectedType, setSelectedType] = useState<string>('all');
+  const [types, setTypes] = useState<string[]>([]);
   const [selectedSchool, setSelectedSchool] = useState<string>('all');
   const [schools, setSchools] = useState<string[]>([]);
   const [showSubmissionForm, setShowSubmissionForm] = useState(false);
@@ -81,28 +82,34 @@ export function HomePage() {
   }, [animals, selectedType, selectedSchool, searchQuery]);
 
   const loadAnimals = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('animals')
-        .select('*')
-        .order('created_at', { ascending: false });
+  try {
+    const { data, error } = await supabase
+      .from('animals')
+      .select('*')
+      .order('created_at', { ascending: false });
 
-      if (error) throw error;
+    if (error) throw error;
 
-      setAnimals(data || []);
+    setAnimals(data || []);
 
-      // 提取学校列表
-      const uniqueSchools = [
-        ...new Set(data?.map((animal) => animal.school) || []),
-      ];
-      setSchools(uniqueSchools);
-    } catch (error: any) {
-      console.error('加载数据失败:', error);
-      toast.error('加载数据失败，请刷新页面');
-    } finally {
-      setLoading(false);
-    }
-  };
+    // 提取类型列表
+    const uniqueTypes = [
+      ...new Set(data?.map((animal) => animal.type) || []),
+    ];
+    setTypes(uniqueTypes);
+
+    // 提取学校列表
+    const uniqueSchools = [
+      ...new Set(data?.map((animal) => animal.school) || []),
+    ];
+    setSchools(uniqueSchools);
+  } catch (error: any) {
+    console.error('加载数据失败:', error);
+    toast.error('加载数据失败，请刷新页面');
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleLike = async (id: string) => {
     try {
@@ -223,17 +230,19 @@ export function HomePage() {
             </div>
 
             {/* 类型筛选 */}
-            <select
-              value={selectedType}
-              onChange={(e) =>
-                setSelectedType(e.target.value as 'all' | 'cat' | 'dog')
-              }
+           {/* 类型筛选 */}
+           <select
+             value={selectedType}
+             onChange={(e) => setSelectedType(e.target.value)}
               className="rounded-xl border border-stone-300 bg-white px-4 py-3 text-amber-600 focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-100 cursor-pointer transition-all hover:border-amber-300 hover:shadow-sm font-medium"
-            >
-              <option value="all" style={{ color: '#d97706' }}>🌟 全部类型</option>
-              <option value="cat" style={{ color: '#d97706' }}>🐱 猫咪</option>
-              <option value="dog" style={{ color: '#d97706' }}>🐶 狗狗</option>
-            </select>
+             >
+            <option value="all" style={{ color: '#d97706' }}>🌟 全部类型</option>
+               {types.map((type) => (
+             <option key={type} value={type} style={{ color: '#d97706' }}>
+             {type === 'cat' ? ' 猫咪' : type === 'dog' ? ' 狗狗' : type === 'other' ? '🐾 其他' : type}
+                </option>
+             ))}
+</select>
 
             {/* 学校筛选 */}
             <select
