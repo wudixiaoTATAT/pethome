@@ -1,0 +1,13 @@
+# 依赖库（绝对不能传，别人用 npm install 安装）
+node_modules/
+
+# 环境变量（包含你的数据库密码和 API Key，绝对不能传！）
+.env
+.env.local
+
+# 压缩包（备份文件没必要传）
+*.zip
+
+# 系统文件
+.DS_Store
+Thumbs.db
