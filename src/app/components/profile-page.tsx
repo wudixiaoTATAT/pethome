@@ -149,12 +149,11 @@ export function ProfilePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-pink-50 relative overflow-hidden">
       {/* 背景装饰 */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute top-20 left-10 h-64 w-64 animate-float-slow rounded-full bg-amber-200/30 blur-3xl" />
-        <div className="absolute top-40 right-20 h-96 w-96 animate-float-medium rounded-full bg-orange-200/20 blur-3xl" />
-        <div className="absolute bottom-20 left-1/3 h-80 w-80 animate-float-fast rounded-full bg-pink-200/25 blur-3xl" />
-      </div>
-
+ <div className="fixed inset-0 -z-10">
+  <div className="absolute top-20 left-10 h-64 w-64 animate-float-slow rounded-full bg-amber-200/30 blur-3xl" />
+  <div className="absolute top-40 right-20 h-96 w-96 animate-float-medium rounded-full bg-orange-200/20 blur-3xl" />
+  <div className="absolute bottom-20 left-1/3 h-80 w-80 animate-float-fast rounded-full bg-pink-200/25 blur-3xl" />
+</div>
       {/* 顶部导航 */}
       <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-amber-100/50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between max-w-4xl">

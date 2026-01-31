@@ -86,6 +86,7 @@ export function HomePage() {
     const { data, error } = await supabase
       .from('animals')
       .select('*')
+      .order('hot_score', { ascending: false })
       .order('created_at', { ascending: false });
 
     if (error) throw error;
