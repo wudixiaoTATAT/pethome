@@ -75,16 +75,18 @@ export function LikeButton({ petId, initialLikes, onLikeChange }: LikeButtonProp
         
         <button
           onClick={handleLike}
-          className={`flex items-center gap-3 px-6 py-3 rounded-2xl font-medium transition-all shadow-md hover:shadow-lg group ${
+          className={`flex items-center gap-3 px-6 py-3 rounded-2xl font-medium transition-all duration-300 shadow-md hover:shadow-lg group ${
             hasLiked
               ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white'
-              : 'bg-white text-muted-foreground hover:bg-rose-50'
+              : 'bg-gradient-to-r from-rose-50 to-pink-50 text-rose-600 hover:from-rose-100 hover:to-pink-100'
           }`}
         >
           <Heart
-            className={`w-6 h-6 transition-all ${
-              hasLiked ? 'fill-white text-white' : 'text-rose-500 group-hover:text-rose-600'
-            } ${isAnimating ? 'animate-bounce' : ''}`}
+            className={`w-6 h-6 transition-all duration-300 ${
+              hasLiked 
+                ? 'fill-white text-white animate-pulse' 
+                : 'text-rose-500 group-hover:text-rose-600'
+            } ${isAnimating ? 'animate-bounce scale-125' : ''}`}
           />
           <span className="text-lg font-semibold">{likes}</span>
         </button>

@@ -77,14 +77,14 @@ export function AnimalDetail({ animal, onClose, onLike }: AnimalDetailProps) {
               <div className="ml-auto">
                 <button
                   onClick={handleLike}
-                  className={`flex items-center gap-2 rounded-full px-6 py-3 text-base font-medium transition-all ${
+                  className={`flex items-center gap-2 rounded-full px-6 py-3 text-base font-medium transition-all duration-300 ${
                     isLiked
-                      ? 'bg-pink-500 text-white shadow-lg'
-                      : 'bg-stone-100 text-stone-700 hover:bg-pink-100 hover:text-pink-600'
+                      ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg'
+                      : 'bg-gradient-to-r from-rose-50 to-pink-50 text-rose-600 hover:from-rose-100 hover:to-pink-100'
                   }`}
                 >
                   <Heart
-                    className={`h-5 w-5 ${isLiked ? 'fill-current' : ''}`}
+                    className={`h-5 w-5 transition-all duration-300 ${isLiked ? 'fill-white text-white animate-pulse' : ''}`}
                   />
                   <span>{localLikes}</span>
                 </button>
